@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoVault — Cryptocurrency Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0B0E11;
+            --bg-card: #1E2026;
+            --bg-elevated: #2B2F36;
+            --border: #363A45;
+            --text-primary: #EAECEF;
+            --text-secondary: #848E9C;
+            --text-muted: #5E6673;
+            --green: #0ECB81;
+            --green-bg: rgba(14, 203, 129, 0.1);
+            --red: #F6465D;
+            --red-bg: rgba(246, 70, 93, 0.1);
+            --yellow: #F0B90B;
+            --blue: #1E90FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 8px 24px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--yellow), #D4A00A);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 4px;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: var(--bg-elevated);
+            color: var(--yellow);
+        }
+
+        .nav-icon {
+            font-size: 1.25rem;
+        }
+
+        .watchlist {
+            margin-top: auto;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .watchlist-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0 8px;
+            margin-bottom: 12px;
+        }
+
+        .watchlist-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .watchlist-item:hover {
+            background: var(--bg-elevated);
+        }
+
+        .watchlist-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .coin-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .watchlist-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .watchlist-symbol {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .watchlist-change {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .watchlist-change.up { color: var(--green); }
+        .watchlist-change.down { color: var(--red); }
+
+        /* Main Content */
+        .main {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .greeting h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .greeting p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--yellow);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            background: #D4A00A;
+        }
+
+        .btn-secondary {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .stat-title {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .stat-change {
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .stat-change.up {
+            background: var(--green-bg);
+            color: var(--green);
+        }
+
+        .stat-change.down {
+            background: var(--red-bg);
+            color: var(--red);
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .stat-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Chart Section */
+        .chart-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .chart-tabs {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-elevated);
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .chart-tab {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: none;
+        }
+
+        .chart-tab.active {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .chart-area {
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            padding-top: 20px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(180deg, var(--green) 0%, rgba(14, 203, 129, 0.2) 100%);
+            border-radius: 4px 4px 0 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .chart-bar:hover {
+            background: linear-gradient(180deg, var(--yellow) 0%, rgba(240, 185, 11, 0.3) 100%);
+        }
+
+        .chart-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .chart-bar:hover::after {
+            opacity: 1;
+        }
+
+        /* Portfolio */
+        .portfolio-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .portfolio-total {
+            text-align: right;
+        }
+
+        .portfolio-total span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .portfolio-total h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .portfolio-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .portfolio-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .portfolio-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .portfolio-info {
+            flex: 1;
+        }
+
+        .portfolio-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .portfolio-amount {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .portfolio-value {
+            text-align: right;
+        }
+
+        .portfolio-usd {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .portfolio-percent {
+            font-size: 0.8rem;
+        }
+
+        .portfolio-percent.up { color: var(--green); }
+        .portfolio-percent.down { color: var(--red); }
+
+        .portfolio-bar {
+            height: 6px;
+            background: var(--bg-elevated);
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .portfolio-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        /* Market Table */
+        .market-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .market-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .market-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .market-table {
+            width: 100%;
+        }
+
+        .market-table th {
+            text-align: left;
+            padding: 12px 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: var(--bg-elevated);
+        }
+
+        .market-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .market-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .market-table tr:hover td {
+            background: var(--bg-elevated);
+        }
+
+        .coin-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .coin-cell-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .coin-cell-name {
+            font-weight: 500;
+        }
+
+        .coin-cell-symbol {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .price-cell {
+            font-weight: 500;
+        }
+
+        .change-cell {
+            font-weight: 500;
+        }
+
+        .change-cell.up { color: var(--green); }
+        .change-cell.down { color: var(--red); }
+
+        .volume-cell {
+            color: var(--text-secondary);
+        }
+
+        .sparkline {
+            width: 100px;
+            height: 30px;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .sparkline-bar {
+            flex: 1;
+            background: var(--green);
+            border-radius: 1px;
+        }
+
+        .sparkline.down .sparkline-bar {
+            background: var(--red);
+        }
+
+        .action-btn {
+            padding: 6px 16px;
+            background: var(--yellow);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #D4A00A;
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .chart-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main {
+                padding: 16px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            .market-table {
+                font-size: 0.85rem;
+            }
+            .market-table th, .market-table td {
+                padding: 12px;
+            }
+            .sparkline {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">₿</div>
+                <span class="logo-text">CryptoVault</span>
+            </div>
+
+            <nav>
+                <div class="nav-item active">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">💼</span>
+                    <span>Portfolio</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">📈</span>
+                    <span>Markets</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">🔄</span>
+                    <span>Exchange</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">📜</span>
+                    <span>Transactions</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Settings</span>
+                </div>
+            </nav>
+
+            <div class="watchlist">
+                <div class="watchlist-title">Watchlist</div>
+                <div class="watchlist-item">
+                    <div class="watchlist-info">
+                        <div class="coin-icon" style="background: #F7931A20; color: #F7931A;">₿</div>
+                        <div>
+                            <div class="watchlist-name">Bitcoin</div>
+                            <div class="watchlist-symbol">BTC</div>
+                        </div>
+                    </div>
+                    <div class="watchlist-change up">+2.4%</div>
+                </div>
+                <div class="watchlist-item">
+                    <div class="watchlist-info">
+                        <div class="coin-icon" style="background: #627EEA20; color: #627EEA;">Ξ</div>
+                        <div>
+                            <div class="watchlist-name">Ethereum</div>
+                            <div class="watchlist-symbol">ETH</div>
+                        </div>
+                    </div>
+                    <div class="watchlist-change up">+3.1%</div>
+                </div>
+                <div class="watchlist-item">
+                    <div class="watchlist-info">
+                        <div class="coin-icon" style="background: #00000020; color: #EAECEF;">◎</div>
+                        <div>
+                            <div class="watchlist-name">Solana</div>
+                            <div class="watchlist-symbol">SOL</div>
+                        </div>
+                    </div>
+                    <div class="watchlist-change down">-1.2%</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <header class="header">
+                <div class="greeting">
+                    <h1>Welcome back, Alex 👋</h1>
+                    <p>Here's what's happening with your portfolio today.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary">🔔 Alerts</button>
+                    <button class="btn btn-primary">+ Buy Crypto</button>
+                </div>
+            </header>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Total Balance</span>
+                        <span class="stat-change up">+12.5%</span>
+                    </div>
+                    <div class="stat-value">$84,532.00</div>
+                    <div class="stat-subtitle">+$9,420.50 this month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Bitcoin (BTC)</span>
+                        <span class="stat-change up">+2.4%</span>
+                    </div>
+                    <div class="stat-value">$67,234.00</div>
+                    <div class="stat-subtitle">1.24 BTC</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Ethereum (ETH)</span>
+                        <span class="stat-change up">+3.1%</span>
+                    </div>
+                    <div class="stat-value">$3,456.00</div>
+                    <div class="stat-subtitle">4.82 ETH</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">24h Profit/Loss</span>
+                        <span class="stat-change up">+5.2%</span>
+                    </div>
+                    <div class="stat-value" style="color: var(--green);">+$2,145.00</div>
+                    <div class="stat-subtitle">Best performer: SOL</div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="chart-section">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Portfolio Performance</h3>
+                        <div class="chart-tabs">
+                            <button class="chart-tab">24H</button>
+                            <button class="chart-tab active">7D</button>
+                            <button class="chart-tab">1M</button>
+                            <button class="chart-tab">1Y</button>
+                            <button class="chart-tab">All</button>
+                        </div>
+                    </div>
+                    <div class="chart-area" id="chartArea">
+                        <!-- Chart bars will be generated -->
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Holdings</h3>
+                    </div>
+                    <div class="portfolio-list">
+                        <div class="portfolio-item">
+                            <div class="portfolio-icon" style="background: #F7931A20; color: #F7931A;">₿</div>
+                            <div class="portfolio-info">
+                                <div class="portfolio-name">Bitcoin</div>
+                                <div class="portfolio-amount">1.24 BTC</div>
+                            </div>
+                            <div class="portfolio-value">
+                                <div class="portfolio-usd">$52,430</div>
+                                <div class="portfolio-percent up">62%</div>
+                            </div>
+                        </div>
+                        <div class="portfolio-bar"><div class="portfolio-bar-fill" style="width: 62%; background: #F7931A;"></div></div>
+
+                        <div class="portfolio-item">
+                            <div class="portfolio-icon" style="background: #627EEA20; color: #627EEA;">Ξ</div>
+                            <div class="portfolio-info">
+                                <div class="portfolio-name">Ethereum</div>
+                                <div class="portfolio-amount">4.82 ETH</div>
+                            </div>
+                            <div class="portfolio-value">
+                                <div class="portfolio-usd">$16,650</div>
+                                <div class="portfolio-percent up">20%</div>
+                            </div>
+                        </div>
+                        <div class="portfolio-bar"><div class="portfolio-bar-fill" style="width: 20%; background: #627EEA;"></div></div>
+
+                        <div class="portfolio-item">
+                            <div class="portfolio-icon" style="background: #14F19520; color: #14F195;">◎</div>
+                            <div class="portfolio-info">
+                                <div class="portfolio-name">Solana</div>
+                                <div class="portfolio-amount">85.5 SOL</div>
+                            </div>
+                            <div class="portfolio-value">
+                                <div class="portfolio-usd">$12,825</div>
+                                <div class="portfolio-percent up">15%</div>
+                            </div>
+                        </div>
+                        <div class="portfolio-bar"><div class="portfolio-bar-fill" style="width: 15%; background: #14F195;"></div></div>
+
+                        <div class="portfolio-item">
+                            <div class="portfolio-icon" style="background: #E6007A20; color: #E6007A;">●</div>
+                            <div class="portfolio-info">
+                                <div class="portfolio-name">Others</div>
+                                <div class="portfolio-amount">Various</div>
+                            </div>
+                            <div class="portfolio-value">
+                                <div class="portfolio-usd">$2,627</div>
+                                <div class="portfolio-percent up">3%</div>
+                            </div>
+                        </div>
+                        <div class="portfolio-bar"><div class="portfolio-bar-fill" style="width: 3%; background: #E6007A;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Table -->
+            <div class="market-section">
+                <div class="market-header">
+                    <h3 class="market-title">Market Overview</h3>
+                    <button class="btn btn-secondary">View All</button>
+                </div>
+                <table class="market-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>24h Change</th>
+                            <th>Volume</th>
+                            <th>Chart</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="marketTableBody">
+                        <!-- Table rows will be generated -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Generate chart
+        const chartArea = document.getElementById('chartArea');
+        const chartData = [65, 72, 68, 80, 75, 85, 78, 92, 88, 95, 90, 98, 94, 100, 96, 105, 102, 110, 108, 115, 112, 120, 118, 125];
+        
+        chartData.forEach((value, i) => {
+            const bar = document.createElement('div');
+            bar.className = 'chart-bar';
+            bar.style.height = `${value * 2.5}px`;
+            bar.dataset.value = `$${(value * 800).toLocaleString()}`;
+            chartArea.appendChild(bar);
+        });
+
+        // Market data
+        const marketData = [
+            { rank: 1, name: 'Bitcoin', symbol: 'BTC', icon: '₿', color: '#F7931A', price: 67234.00, change: 2.4, volume: '32.5B', up: true },
+            { rank: 2, name: 'Ethereum', symbol: 'ETH', icon: 'Ξ', color: '#627EEA', price: 3456.00, change: 3.1, volume: '18.2B', up: true },
+            { rank: 3, name: 'Solana', symbol: 'SOL', icon: '◎', color: '#14F195', price: 150.00, change: -1.2, volume: '4.8B', up: false },
+            { rank: 4, name: 'Cardano', symbol: 'ADA', icon: '₳', color: '#0033AD', price: 0.65, change: 1.8, volume: '890M', up: true },
+            { rank: 5, name: 'Polkadot', symbol: 'DOT', icon: '●', color: '#E6007A', price: 8.45, change: -0.5, volume: '520M', up: false },
+        ];
+
+        const tableBody = document.getElementById('marketTableBody');
+        
+        function generateSparkline(up) {
+            const heights = Array.from({length: 12}, () => Math.random() * 20 + 10);
+            return heights.map(h => `<div class="sparkline-bar" style="height: ${h}px"></div>`).join('');
+        }
+
+        tableBody.innerHTML = marketData.map(coin => `
+            <tr>
+                <td>${coin.rank}</td>
+                <td>
+                    <div class="coin-cell">
+                        <div class="coin-cell-icon" style="background: ${coin.color}20; color: ${coin.color};">${coin.icon}</div>
+                        <div>
+                            <div class="coin-cell-name">${coin.name}</div>
+                            <div class="coin-cell-symbol">${coin.symbol}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="price-cell">$${coin.price.toLocaleString()}</td>
+                <td class="change-cell ${coin.up ? 'up' : 'down'}">${coin.up ? '+' : ''}${coin.change}%</td>
+                <td class="volume-cell">$${coin.volume}</td>
+                <td>
+                    <div class="sparkline ${coin.up ? '' : 'down'}">
+                        ${generateSparkline(coin.up)}
+                    </div>
+                </td>
+                <td><button class="action-btn">Trade</button></td>
+            </tr>
+        `).join('');
+
+        // Simulate live updates
+        setInterval(() => {
+            document.querySelectorAll('.change-cell').forEach(cell => {
+                const currentValue = parseFloat(cell.textContent);
+                const change = (Math.random() - 0.5) * 0.2;
+                const newValue = currentValue + change;
+                cell.textContent = `${newValue > 0 ? '+' : ''}${newValue.toFixed(1)}%`;
+                cell.className = `change-cell ${newValue > 0 ? 'up' : 'down'}`;
+            });
+        }, 5000);
+    </script>
+</body>
+</html>
