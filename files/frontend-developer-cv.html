@@ -662,7 +662,7 @@
         <main class="cv-main">
             <header class="main-header">
                 <h1 class="main-name">Dasha Mykhailenko</h1>
-                <p class="main-title">Senior Frontend Developer</p>
+              
                 <p class="main-summary">
                  Junior Frontend Developer with 1 year of hands-on experience in creating responsive websites and interactive UI components.
 Skilled in translating designs from Figma into clean, semantic HTML and well-structured CSS.
@@ -786,9 +786,9 @@ Passionate about frontend development, actively learning React, and building rea
     </div>
 
     <script>
-        function downloadSVG() {
-            // Create SVG version of the CV
-            const svgContent = `<?xml version="1.0" encoding="UTF-8"?>
+       function downloadSVG() {
+    // Данные из вашего резюме перенесены в SVG формат
+    const svgContent = `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="1000" height="1414" viewBox="0 0 1000 1414" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -796,221 +796,100 @@ Passionate about frontend development, actively learning React, and building rea
       <stop offset="100%" style="stop-color:#8B5CF6"/>
     </linearGradient>
     <style>
-      .title { font-family: Inter, Arial, sans-serif; font-weight: 700; }
-      .subtitle { font-family: Inter, Arial, sans-serif; font-weight: 600; }
-      .body { font-family: Inter, Arial, sans-serif; font-weight: 400; }
-      .small { font-family: Inter, Arial, sans-serif; font-weight: 500; }
+      .title { font-family: 'Inter', Arial, sans-serif; font-weight: 700; }
+      .subtitle { font-family: 'Inter', Arial, sans-serif; font-weight: 600; }
+      .body { font-family: 'Inter', Arial, sans-serif; font-weight: 400; }
+      .small { font-family: 'Inter', Arial, sans-serif; font-weight: 500; }
     </style>
   </defs>
   
-  <!-- Background -->
   <rect width="1000" height="1414" fill="#FFFFFF"/>
   
-  <!-- Sidebar Background -->
   <rect width="320" height="1414" fill="#0F172A"/>
   
-  <!-- Profile Photo Circle -->
   <circle cx="160" cy="120" r="70" fill="url(#accentGradient)"/>
   <text x="160" y="135" text-anchor="middle" fill="white" font-size="48">👩‍💻</text>
   
-  <!-- Sidebar Name -->
-  <text x="160" y="230" text-anchor="middle" fill="white" class="title" font-size="24">Dasha Kovalenko</text>
+  <text x="160" y="230" text-anchor="middle" fill="white" class="title" font-size="22">Dariia Mykhailenko</text>
   <text x="160" y="260" text-anchor="middle" fill="#3B82F6" class="subtitle" font-size="14">Frontend Developer</text>
   
-  <!-- Contact Section Title -->
   <text x="32" y="320" fill="#64748B" class="small" font-size="11" letter-spacing="1.5">CONTACT</text>
   <line x1="32" y1="330" x2="288" y2="330" stroke="#1E293B" stroke-width="1"/>
   
-  <!-- Contact Items -->
-  <rect x="32" y="350" width="36" height="36" rx="8" fill="#1E293B"/>
-  <text x="50" y="375" text-anchor="middle" font-size="14">📧</text>
-  <text x="80" y="373" fill="#D1D5DB" class="body" font-size="13">dasha.dev@email.com</text>
+  <text x="32" y="360" fill="#D1D5DB" class="body" font-size="12">📧 dari.dev.job@gmail.com</text>
+  <text x="32" y="390" fill="#D1D5DB" class="body" font-size="12">📍 Kyiv, UA</text>
+  <text x="32" y="420" fill="#D1D5DB" class="body" font-size="12">🔗 linkedin.com/in/dashadev</text>
+  <text x="32" y="450" fill="#D1D5DB" class="body" font-size="12">💻 github.com/DashaM2701</text>
   
-  <rect x="32" y="400" width="36" height="36" rx="8" fill="#1E293B"/>
-  <text x="50" y="425" text-anchor="middle" font-size="14">📱</text>
-  <text x="80" y="423" fill="#D1D5DB" class="body" font-size="13">+1 (555) 123-4567</text>
+  <text x="32" y="520" fill="#64748B" class="small" font-size="11" letter-spacing="1.5">SKILLS</text>
+  <line x1="32" y1="530" x2="288" y2="530" stroke="#1E293B" stroke-width="1"/>
   
-  <rect x="32" y="450" width="36" height="36" rx="8" fill="#1E293B"/>
-  <text x="50" y="475" text-anchor="middle" font-size="14">📍</text>
-  <text x="80" y="473" fill="#D1D5DB" class="body" font-size="13">San Francisco, CA</text>
+  <text x="32" y="560" fill="#3B82F6" class="subtitle" font-size="12">Frontend</text>
+  <text x="32" y="580" fill="#E5E7EB" class="body" font-size="11">React (base), JavaScript</text>
   
-  <rect x="32" y="500" width="36" height="36" rx="8" fill="#1E293B"/>
-  <text x="50" y="525" text-anchor="middle" font-size="14">🔗</text>
-  <text x="80" y="523" fill="#D1D5DB" class="body" font-size="13">linkedin.com/in/dashadev</text>
+  <text x="32" y="620" fill="#3B82F6" class="subtitle" font-size="12">Styling</text>
+  <text x="32" y="640" fill="#E5E7EB" class="body" font-size="11">CSS3, SCSS, Tailwind, Bootstrap</text>
   
-  <rect x="32" y="550" width="36" height="36" rx="8" fill="#1E293B"/>
-  <text x="50" y="575" text-anchor="middle" font-size="14">💻</text>
-  <text x="80" y="573" fill="#D1D5DB" class="body" font-size="13">github.com/dashadev</text>
+  <text x="32" y="680" fill="#3B82F6" class="subtitle" font-size="12">Tools</text>
+  <text x="32" y="700" fill="#E5E7EB" class="body" font-size="11">Git, Figma, Webpack, Vite</text>
   
-  <!-- Skills Section -->
-  <text x="32" y="640" fill="#64748B" class="small" font-size="11" letter-spacing="1.5">SKILLS</text>
-  <line x1="32" y1="650" x2="288" y2="650" stroke="#1E293B" stroke-width="1"/>
+  <text x="32" y="770" fill="#64748B" class="small" font-size="11" letter-spacing="1.5">LANGUAGES</text>
+  <line x1="32" y1="780" x2="288" y2="780" stroke="#1E293B" stroke-width="1"/>
+  <text x="32" y="810" fill="#E5E7EB" class="body" font-size="12">English: ●●○○○</text>
+  <text x="32" y="840" fill="#E5E7EB" class="body" font-size="12">Ukrainian: ●●●●●</text>
+  <text x="32" y="870" fill="#E5E7EB" class="body" font-size="12">Russian: ●●●●●</text>
   
-  <text x="32" y="680" fill="#3B82F6" class="subtitle" font-size="12">Frontend</text>
-  <rect x="32" y="695" width="55" height="26" rx="6" fill="#1E293B"/>
-  <text x="59" y="713" text-anchor="middle" fill="#E5E7EB" class="body" font-size="11">React</text>
-  <rect x="93" y="695" width="80" height="26" rx="6" fill="#1E293B"/>
-  <text x="133" y="713" text-anchor="middle" fill="#E5E7EB" class="body" font-size="11">TypeScript</text>
-  <rect x="179" y="695" width="60" height="26" rx="6" fill="#1E293B"/>
-  <text x="209" y="713" text-anchor="middle" fill="#E5E7EB" class="body" font-size="11">Next.js</text>
-  <rect x="32" y="727" width="50" height="26" rx="6" fill="#1E293B"/>
-  <text x="57" y="745" text-anchor="middle" fill="#E5E7EB" class="body" font-size="11">Vue.js</text>
-  <rect x="88" y="727" width="75" height="26" rx="6" fill="#1E293B"/>
-  <text x="125" y="745" text-anchor="middle" fill="#E5E7EB" class="body" font-size="11">JavaScript</text>
+  <text x="368" y="70" fill="#0F172A" class="title" font-size="36">Dariia Mykhailenko</text>
   
-  <text x="32" y="780" fill="#3B82F6" class="subtitle" font-size="12">Styling</text>
-  <rect x="32" y="795" width="45" height="26" rx="6" fill="#1E293B"/>
-  <text x="54" y="813" text-anchor="middle" fill="#E5E7EB" class="body" font-size="11">CSS3</text>
-  <rect x="83" y="795" width="50" height="26" rx="6" fill="#1E293B"/>
-  <text x="108" y="813" text-anchor="middle" fill="#E5E7EB" class="body" font-size="11">SCSS</text>
-  <rect x="139" y="795" width="65" height="26" rx="6" fill="#1E293B"/>
-  <text x="171" y="813" text-anchor="middle" fill="#E5E7EB" class="body" font-size="11">Tailwind</text>
+  <text x="368" y="110" fill="#64748B" class="body" font-size="13">Junior Frontend Developer with 1 year of hands-on experience in creating</text>
+  <text x="368" y="130" fill="#64748B" class="body" font-size="13">responsive websites and interactive UI components. Skilled in translating</text>
+  <text x="368" y="150" fill="#64748B" class="body" font-size="13">designs from Figma into clean, semantic HTML and well-structured CSS.</text>
+
+  <rect x="368" y="200" width="4" height="20" rx="2" fill="url(#accentGradient)"/>
+  <text x="384" y="216" fill="#0F172A" class="title" font-size="18">Work Experience</text>
   
-  <text x="32" y="860" fill="#3B82F6" class="subtitle" font-size="12">Tools</text>
-  <rect x="32" y="875" width="35" height="26" rx="6" fill="#1E293B"/>
-  <text x="49" y="893" text-anchor="middle" fill="#E5E7EB" class="body" font-size="11">Git</text>
-  <rect x="73" y="875" width="50" height="26" rx="6" fill="#1E293B"/>
-  <text x="98" y="893" text-anchor="middle" fill="#E5E7EB" class="body" font-size="11">Figma</text>
-  <rect x="129" y="875" width="65" height="26" rx="6" fill="#1E293B"/>
-  <text x="161" y="893" text-anchor="middle" fill="#E5E7EB" class="body" font-size="11">Webpack</text>
-  <rect x="200" y="875" width="40" height="26" rx="6" fill="#1E293B"/>
-  <text x="220" y="893" text-anchor="middle" fill="#E5E7EB" class="body" font-size="11">Vite</text>
+  <text x="380" y="250" fill="#0F172A" class="subtitle" font-size="14">Junior Frontend Developer | BullTrafic.</text>
+  <text x="780" y="250" fill="#94A3B8" class="small" font-size="11">Sept 2024 — Present</text>
+  <text x="380" y="270" fill="#64748B" class="body" font-size="12">• Developed responsive and user-friendly web interfaces</text>
+  <text x="380" y="285" fill="#64748B" class="body" font-size="12">• Added interactivity using JavaScript (DOM, events, basic logic)</text>
+
+  <text x="380" y="325" fill="#0F172A" class="subtitle" font-size="14">Web Markup Developer | BullTrafic.</text>
+  <text x="780" y="325" fill="#94A3B8" class="small" font-size="11">Jan 2025 — Aug 2025</text>
+  <text x="380" y="345" fill="#64748B" class="body" font-size="12">• Built adaptive interfaces for desktop, tablet, and mobile devices</text>
+  <text x="380" y="360" fill="#64748B" class="body" font-size="12">• Styled layouts using CSS, Tailwind CSS, and Bootstrap</text>
+
+  <rect x="368" y="420" width="4" height="20" rx="2" fill="url(#accentGradient)"/>
+  <text x="384" y="436" fill="#0F172A" class="title" font-size="18">Featured Projects</text>
   
-  <!-- Languages -->
-  <text x="32" y="950" fill="#64748B" class="small" font-size="11" letter-spacing="1.5">LANGUAGES</text>
-  <line x1="32" y1="960" x2="288" y2="960" stroke="#1E293B" stroke-width="1"/>
+  <rect x="368" y="460" width="280" height="90" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="380" y="485" fill="#0F172A" class="subtitle" font-size="13">GlowSkin Studio</text>
+  <text x="380" y="505" fill="#64748B" class="body" font-size="11">Modern beauty landing page with</text>
+  <text x="380" y="520" fill="#64748B" class="body" font-size="11">smooth scrolling and booking modal.</text>
+
+  <rect x="660" y="460" width="280" height="90" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="672" y="485" fill="#0F172A" class="subtitle" font-size="13">MovieSphere</text>
+  <text x="672" y="505" fill="#64748B" class="body" font-size="11">Movie search app with OMDb API</text>
+  <text x="672" y="520" fill="#64748B" class="body" font-size="11">integration and animations.</text>
+
+  <rect x="368" y="590" width="4" height="20" rx="2" fill="url(#accentGradient)"/>
+  <text x="384" y="606" fill="#0F172A" class="title" font-size="18">Education</text>
   
-  <text x="32" y="990" fill="#E5E7EB" class="body" font-size="13">English</text>
-  <circle cx="200" cy="986" r="5" fill="#3B82F6"/>
-  <circle cx="218" cy="986" r="5" fill="#3B82F6"/>
-  <circle cx="236" cy="986" r="5" fill="#3B82F6"/>
-  <circle cx="254" cy="986" r="5" fill="#3B82F6"/>
-  <circle cx="272" cy="986" r="5" fill="#3B82F6"/>
-  
-  <text x="32" y="1020" fill="#E5E7EB" class="body" font-size="13">Ukrainian</text>
-  <circle cx="200" cy="1016" r="5" fill="#3B82F6"/>
-  <circle cx="218" cy="1016" r="5" fill="#3B82F6"/>
-  <circle cx="236" cy="1016" r="5" fill="#3B82F6"/>
-  <circle cx="254" cy="1016" r="5" fill="#3B82F6"/>
-  <circle cx="272" cy="1016" r="5" fill="#3B82F6"/>
-  
-  <text x="32" y="1050" fill="#E5E7EB" class="body" font-size="13">German</text>
-  <circle cx="200" cy="1046" r="5" fill="#3B82F6"/>
-  <circle cx="218" cy="1046" r="5" fill="#3B82F6"/>
-  <circle cx="236" cy="1046" r="5" fill="#3B82F6"/>
-  <circle cx="254" cy="1046" r="5" fill="#1E293B"/>
-  <circle cx="272" cy="1046" r="5" fill="#1E293B"/>
-  
-  <!-- MAIN CONTENT -->
-  
-  <!-- Header -->
-  <text x="368" y="70" fill="#0F172A" class="title" font-size="42">Dasha Kovalenko</text>
-  <text x="368" y="105" fill="#3B82F6" class="subtitle" font-size="20">Senior Frontend Developer</text>
-  <text x="368" y="145" fill="#64748B" class="body" font-size="14">Passionate frontend developer with 4+ years of experience building modern,</text>
-  <text x="368" y="165" fill="#64748B" class="body" font-size="14">responsive web applications. Specialized in React ecosystem with a strong</text>
-  <text x="368" y="185" fill="#64748B" class="body" font-size="14">eye for design and user experience.</text>
-  
-  <line x1="368" y1="210" x2="952" y2="210" stroke="#E2E8F0" stroke-width="2"/>
-  
-  <!-- Experience Section -->
-  <rect x="368" y="240" width="4" height="20" rx="2" fill="url(#accentGradient)"/>
-  <text x="384" y="256" fill="#0F172A" class="title" font-size="18">Work Experience</text>
-  
-  <!-- Experience 1 -->
-  <circle cx="378" cy="300" r="5" fill="#3B82F6"/>
-  <line x1="378" y1="310" x2="378" y2="420" stroke="#E2E8F0" stroke-width="2"/>
-  <text x="400" y="305" fill="#0F172A" class="subtitle" font-size="15">Senior Frontend Developer</text>
-  <text x="780" y="305" fill="#94A3B8" class="small" font-size="12">Jan 2023 — Present</text>
-  <text x="400" y="325" fill="#3B82F6" class="subtitle" font-size="13">TechCorp Inc. — San Francisco, CA</text>
-  <text x="400" y="350" fill="#64748B" class="body" font-size="12">• Led frontend development for a SaaS platform serving 50K+ users</text>
-  <text x="400" y="368" fill="#64748B" class="body" font-size="12">• Architected and implemented design system reducing dev time by 40%</text>
-  <text x="400" y="386" fill="#64748B" class="body" font-size="12">• Mentored 3 junior developers and conducted code reviews</text>
-  
-  <!-- Experience 2 -->
-  <circle cx="378" cy="440" r="5" fill="#3B82F6"/>
-  <line x1="378" y1="450" x2="378" y2="550" stroke="#E2E8F0" stroke-width="2"/>
-  <text x="400" y="445" fill="#0F172A" class="subtitle" font-size="15">Frontend Developer</text>
-  <text x="780" y="445" fill="#94A3B8" class="small" font-size="12">Mar 2021 — Dec 2022</text>
-  <text x="400" y="465" fill="#3B82F6" class="subtitle" font-size="13">Digital Agency Pro — Remote</text>
-  <text x="400" y="490" fill="#64748B" class="body" font-size="12">• Developed 15+ responsive websites for clients across various industries</text>
-  <text x="400" y="508" fill="#64748B" class="body" font-size="12">• Built interactive dashboards and data visualization components</text>
-  
-  <!-- Experience 3 -->
-  <circle cx="378" cy="570" r="5" fill="#3B82F6"/>
-  <text x="400" y="575" fill="#0F172A" class="subtitle" font-size="15">Junior Frontend Developer</text>
-  <text x="780" y="575" fill="#94A3B8" class="small" font-size="12">Jun 2020 — Feb 2021</text>
-  <text x="400" y="595" fill="#3B82F6" class="subtitle" font-size="13">StartupXYZ — Kyiv, Ukraine</text>
-  <text x="400" y="620" fill="#64748B" class="body" font-size="12">• Built and maintained React components for e-commerce platform</text>
-  <text x="400" y="638" fill="#64748B" class="body" font-size="12">• Implemented responsive designs and cross-browser compatibility</text>
-  
-  <!-- Projects Section -->
-  <rect x="368" y="690" width="4" height="20" rx="2" fill="url(#accentGradient)"/>
-  <text x="384" y="706" fill="#0F172A" class="title" font-size="18">Featured Projects</text>
-  
-  <!-- Project Cards -->
-  <rect x="368" y="730" width="280" height="110" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
-  <text x="388" y="758" fill="#0F172A" class="subtitle" font-size="14">🛍️ UrbanWear Store</text>
-  <text x="388" y="780" fill="#64748B" class="body" font-size="11">Full-featured React e-commerce SPA</text>
-  <text x="388" y="796" fill="#64748B" class="body" font-size="11">with cart, wishlist, and filters.</text>
-  <rect x="388" y="810" width="45" height="20" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
-  <text x="410" y="824" text-anchor="middle" fill="#64748B" class="body" font-size="9">React</text>
-  
-  <rect x="660" y="730" width="280" height="110" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
-  <text x="680" y="758" fill="#0F172A" class="subtitle" font-size="14">🎬 MovieSphere</text>
-  <text x="680" y="780" fill="#64748B" class="body" font-size="11">Movie search app with OMDb API</text>
-  <text x="680" y="796" fill="#64748B" class="body" font-size="11">integration and smooth animations.</text>
-  <rect x="680" y="810" width="35" height="20" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
-  <text x="697" y="824" text-anchor="middle" fill="#64748B" class="body" font-size="9">API</text>
-  
-  <rect x="368" y="850" width="280" height="110" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
-  <text x="388" y="878" fill="#0F172A" class="subtitle" font-size="14">📊 CryptoVault</text>
-  <text x="388" y="900" fill="#64748B" class="body" font-size="11">Cryptocurrency dashboard with</text>
-  <text x="388" y="916" fill="#64748B" class="body" font-size="11">portfolio tracking and charts.</text>
-  
-  <rect x="660" y="850" width="280" height="110" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
-  <text x="680" y="878" fill="#0F172A" class="subtitle" font-size="14">📋 Taskflow</text>
-  <text x="680" y="900" fill="#64748B" class="body" font-size="11">Kanban board with drag-and-drop</text>
-  <text x="680" y="916" fill="#64748B" class="body" font-size="11">and task management.</text>
-  
-  <!-- Education Section -->
-  <rect x="368" y="990" width="4" height="20" rx="2" fill="url(#accentGradient)"/>
-  <text x="384" y="1006" fill="#0F172A" class="title" font-size="18">Education</text>
-  
-  <text x="368" y="1040" fill="#94A3B8" class="small" font-size="12">2016 — 2020</text>
-  <text x="480" y="1040" fill="#0F172A" class="subtitle" font-size="14">Bachelor of Computer Science</text>
-  <text x="480" y="1060" fill="#64748B" class="body" font-size="12">National Technical University — Kyiv, Ukraine</text>
-  
-  <!-- Certifications Section -->
-  <rect x="368" y="1100" width="4" height="20" rx="2" fill="url(#accentGradient)"/>
-  <text x="384" y="1116" fill="#0F172A" class="title" font-size="18">Certifications</text>
-  
-  <rect x="368" y="1140" width="572" height="50" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
-  <text x="388" y="1160" font-size="18">🏆</text>
-  <text x="420" y="1162" fill="#0F172A" class="subtitle" font-size="13">Meta Frontend Developer Professional</text>
-  <text x="420" y="1180" fill="#94A3B8" class="body" font-size="11">Meta (Facebook) • 2023</text>
-  
-  <rect x="368" y="1200" width="572" height="50" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
-  <text x="388" y="1220" font-size="18">📜</text>
-  <text x="420" y="1222" fill="#0F172A" class="subtitle" font-size="13">Advanced React Patterns</text>
-  <text x="420" y="1240" fill="#94A3B8" class="body" font-size="11">Frontend Masters • 2022</text>
-  
-  <rect x="368" y="1260" width="572" height="50" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
-  <text x="388" y="1280" font-size="18">✨</text>
-  <text x="420" y="1282" fill="#0F172A" class="subtitle" font-size="13">TypeScript Deep Dive</text>
-  <text x="420" y="1300" fill="#94A3B8" class="body" font-size="11">Udemy • 2022</text>
-  
+  <text x="368" y="640" fill="#94A3B8" class="small" font-size="11">2018 — 2023</text>
+  <text x="480" y="640" fill="#0F172A" class="subtitle" font-size="13">Financier</text>
+  <text x="480" y="655" fill="#64748B" class="body" font-size="11">Poltava university of economics and trade</text>
+
 </svg>`;
-            
-            const blob = new Blob([svgContent], { type: 'image/svg+xml' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'frontend-developer-cv.svg';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
+    
+    const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Dariia-Mykhailenko-CV.svg';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
     </script>
 </body>
 </html>
