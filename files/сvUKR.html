@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Developer — CV/Резюме</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0F172A;
+            --secondary: #334155;
+            --accent: #3B82F6;
+            --accent-light: #DBEAFE;
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --text-muted: #94A3B8;
+            --bg-white: #FFFFFF;
+            --bg-light: #F8FAFC;
+            --border: #E2E8F0;
+            --gradient-start: #3B82F6;
+            --gradient-end: #8B5CF6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+            .cv-container {
+                box-shadow: none;
+                margin: 0;
+                max-width: 100%;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .cv-main {
+                padding: 40px;
+            }
+            .cv-sidebar {
+                padding: 40px 30px;
+            }
+        }
+
+        /* Controls */
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .control-btn {
+            padding: 12px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        /* CV Container */
+        .cv-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: var(--bg-white);
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+        }
+
+        /* Sidebar */
+        .cv-sidebar {
+            background: var(--primary);
+            color: white;
+            padding: 48px 32px;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profile-photo {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            border: 4px solid rgba(255,255,255,0.2);
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .profile-title {
+            font-size: 0.95rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .sidebar-section {
+            margin-bottom: 32px;
+        }
+
+        .sidebar-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text {
+            word-break: break-word;
+        }
+
+        .contact-text a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .contact-text a:hover {
+            color: var(--accent);
+        }
+
+        /* Skills */
+        .skill-category {
+            margin-bottom: 20px;
+        }
+
+        .skill-category-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-tag {
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Languages */
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .language-name {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .language-level {
+            display: flex;
+            gap: 4px;
+        }
+
+        .level-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .level-dot.filled {
+            background: var(--accent);
+        }
+
+        /* Main Content */
+        .cv-main {
+            padding: 48px;
+        }
+
+        .main-header {
+            margin-bottom: 36px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .main-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            line-height: 1.1;
+        }
+
+        .main-title {
+            font-size: 1.25rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .main-summary {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .main-section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 2px;
+        }
+
+        /* Experience */
+        .experience-item {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 28px;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .experience-item::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 22px;
+            width: 2px;
+            height: calc(100% + 10px);
+            background: var(--border);
+        }
+
+        .experience-item:last-child::after {
+            display: none;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .experience-role {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .experience-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .experience-company {
+            font-size: 0.95rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .experience-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .experience-desc ul {
+            padding-left: 18px;
+            margin-top: 8px;
+        }
+
+        .experience-desc li {
+            margin-bottom: 6px;
+        }
+
+        .tech-used {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .tech-tag {
+            padding: 4px 10px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .project-card {
+            padding: 20px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .project-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        /* Education */
+        .education-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .education-year {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            min-width: 90px;
+        }
+
+        .education-details h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .education-details p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .cv-container {
+                grid-template-columns: 1fr;
+                margin: 20px;
+            }
+            .cv-sidebar {
+                padding: 32px 24px;
+            }
+            .cv-main {
+                padding: 32px 24px;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .controls {
+                position: static;
+                justify-content: center;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+  
+
+    <div class="cv-container" id="cvContainer">
+        <aside class="cv-sidebar">
+            <div class="profile-section">
+             
+                <h1 class="profile-name">Дарія Михайленко</h1>
+                <p class="profile-title">Frontend Developer</p>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Контакти</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-text">
+                        <a href="mailto:dari.dev.job@gmail.com">dari.dev.job@gmail.com</a>
+                    </div>
+                </div>
+              
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-text">Київ, Україна</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🔗</div>
+                    <div class="contact-text">
+                        <a href="https://www.linkedin.com/in/%D0%B4%D0%B0%D1%88%D0%B0-%D0%BC%D0%B8%D1%85%D0%B0%D0%B9%D0%BB%D0%B5%D0%BD%D0%BA%D0%BE-4017212b2/">linkedin.com/in/dashadev</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💻</div>
+                    <div class="contact-text">
+                        <a href="https://github.com/DashaM2701">github.com/DashaM2701</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🌐</div>
+                    <div class="contact-text">
+                        <a href="#">dashadev.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Навички</h3>
+                <div class="skill-category">
+                    <div class="skill-category-title">Frontend</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React (base)</span>
+                        <span class="skill-tag">JavaScript</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Стилізація</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">CSS3</span>
+                        
+                        <span class="skill-tag">Tailwind</span>
+                        <span class="skill-tag">Styled-Components</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Інструменти</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Figma</span>
+                       
+                        <span class="skill-tag">Vite</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Мови</h3>
+                <div class="language-item">
+                    <span class="language-name">Англійська</span>
+                    <div class="language-level">
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot "></div>
+                        <div class="level-dot "></div>
+                        <div class="level-dot"></div>
+                    </div>
+                </div>
+                <div class="language-item">
+                    <span class="language-name">Українська</span>
+                    <div class="language-level">
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                    </div>
+                </div>
+                <div class="language-item">
+                    <span class="language-name">Російська</span>
+                    <div class="language-level">
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                        <div class="level-dot filled"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="cv-main">
+            <header class="main-header">
+                <h1 class="main-name">Дарія Михайленко</h1>
+              
+                <p class="main-summary">
+                    Junior Frontend Developer з річним досвідом створення адаптивних вебсайтів та інтерактивних компонентів інтерфейсу.
+Володію навичками перенесення дизайнів з Figma у чистий семантичний HTML та структурований CSS.
+Маю досвід використання JavaScript для маніпуляцій з DOM та базової інтерактивності.
+Захоплююся фронтенд-розробкою, активно вивчаю React та створюю реальні проєкти для підвищення якості портфоліо.
+                </p>
+            </header>
+
+            <section class="main-section">
+                <h2 class="section-title">Досвід роботи</h2>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="experience-role">Web Markup Developer</span>
+                        <span class="experience-date">Січ 2025 — Серп 2025</span>
+                    </div>
+                    <div class="experience-company">BullTrafic. — Remote</div>
+                    <div class="experience-desc">
+                        <ul>
+                            <li>Розробка адаптивних макетів сайтів за допомогою HTML5 та CSS3</li>
+                            <li>Створення адаптивних інтерфейсів для десктопних, планшетних та мобільних пристроїв</li>
+                            <li>Стилізація макетів з використанням CSS, Tailwind CSS та Bootstrap</li>
+                            <li>Забезпечення кросбраузерної сумісності та адаптивної поведінки</li>
+                        </ul>
+                    </div>
+                    <div class="tech-used">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>                     
+                        <span class="tech-tag">Tailwind</span>
+                        <span class="tech-tag">Bootstrap</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="experience-role">Junior Frontend Developer</span>
+                        <span class="experience-date">Вер 2025 — Бер 2026</span>
+                    </div>
+                    <div class="experience-company">BullTrafic. — Remote</div>
+                    <div class="experience-desc">
+                        <ul>
+                            <li>Розробка адаптивних та зручних веб-інтерфейсів за допомогою HTML, CSS та JavaScript</li>
+                            <li>Додавання інтерактивності за допомогою JavaScript (маніпуляції з DOM, події, базова логіка)</li>
+                            <li>Постійне вдосконалення навичок через створення реальних проєктів та портфоліо</li>
+                        </ul>
+                    </div>
+                    <div class="tech-used">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Tailwind</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="main-section">
+                <h2 class="section-title">Вибрані проєкти</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h4 class="project-name">GlowSkin Studio</h4>
+                        <p class="project-desc">Сучасний та елегантний лендинг для студії краси з плавним скролом, виділенням послуг та вбудованим модальним вікном бронювання. Створений для преміального користувацького досвіду.</p>
+                        <div class="tech-used">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h4 class="project-name">🎬 MovieSphere</h4>
+                        <p class="project-desc">Додаток для пошуку фільмів з інтеграцією OMDb API, детальним переглядом та плавними анімаціями.</p>
+                        <div class="tech-used">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h4 class="project-name">📊 CryptoVault</h4>
+                        <p class="project-desc">Криптовалютний дашборд з відстеженням портфеля, графіками та даними в реальному часі.</p>
+                        <div class="tech-used">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h4 class="project-name">📋 Taskflow</h4>
+                        <p class="project-desc">Kanban-дошка з можливістю перетягування (drag-and-drop), управлінням завданнями та організацією проєктів.</p>
+                        <div class="tech-used">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">DnD</span>
+                            <span class="tech-tag">TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="main-section">
+                <h2 class="section-title">Освіта</h2>
+                <div class="education-item">
+                    <div class="education-year">2023 — 2024</div>
+                    <div class="education-details">
+                        <h4>Онлайн-курси розробки</h4>
+                        <p>Дистанційно</p>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="education-year">2018 — 2023</div>
+                    <div class="education-details">
+                        <h4>Фінансист</h4>
+                        <p>Полтавський університет економіки і торгівлі</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
